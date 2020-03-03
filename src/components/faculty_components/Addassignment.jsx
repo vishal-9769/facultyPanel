@@ -2,98 +2,95 @@ import React, { Component,Fragment } from 'react'
 import NavBar from './NavigationBar'
 //import { DisplayToggles } from './display_toggles';
 import {
-    EuiPage,
-    EuiPageBody,
-    EuiPageSideBar,
-    EuiFilePicker,
+  EuiPage,
+  EuiPageBody,
+  EuiPageSideBar, 
+  EuiDatePicker,
   EuiFlexGroup,
   EuiFlexItem,
   EuiText,
   EuiSpacer,
+  EuiComboBox,
+  EuiFieldText,
+  EuiFormRow,
+  EuiFilePicker,
+  EuiRange,
+  EuiSelect,
+  EuiPanel,
   EuiSwitch,
   } from '@elastic/eui'
 import TreeView from './TreeView'
+import { EuiButton } from '@elastic/eui';
 //import FacultyDashboard from './FacultyDashboard'
 
 export class Addassignment extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          files: {},
-          large: true,
-        };
-      }
-      onChange = files => {
-        this.setState({
-          files: files,
-        });
-      };
-      renderFiles() {
-        if (this.state.files.length > 0) {
-          return (
-            <ul>
-              {Object.keys(this.state.files).map((item, i) => (
-                <li key={i}>
-                  <strong>{this.state.files[item].name}</strong> (
-                  {this.state.files[item].size} bytes)
-                </li>
-              ))}
-            </ul>
-          );
-        } else {
-          return (
-            <p>Add some files to see a demo of retrieving from the FileList</p>
-          );
-        }
-      }
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      isSwitchChecked: false,
+      comboBoxSelectionOptions: [],
+      value: '20',
+    };
+    /* this.state = {
+      startDate: moment(),
+    }; */
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(date) {
+    this.setState({
+      startDate: date,
+    });
+  }
+  onRangeChange = e => {
+    this.setState({
+      value: e.target.value,
+    });
+  };
+
+  onSwitchChange = () => {
+    this.setState({
+      isSwitchChecked: !this.state.isSwitchChecked,
+    });
+  };
     render() {
         return (
             <div>
                 <NavBar/>
                 <EuiPage>
                     <EuiPageSideBar><TreeView/></EuiPageSideBar>
-                    <EuiPageBody>
- <Fragment>
-        <EuiFlexGroup>
-          <EuiFlexItem grow={2}>
-            {/* DisplayToggles wrapper for Docs only */}
-            {/* <DisplayToggles
-              canReadOnly={false}
-              extras={[
-                <EuiSwitch
-                  compressed
-                  label={'large'}
-                  checked={this.state.large}
-                  onChange={e => {
-                    this.setState({ large: e.target.checked });
-                  }}
-                />,
-              ]}>*/}
-              <EuiFilePicker 
-                id="asdf2"
-                
-                style={{ maxWidth: '400px' }}
-                multiple
-                initialPromptText="Select or drag and drop multiple files"
-                onChange={files => {
-                  this.onChange(files);
-                }}
-                display={this.state.large ? 'large' : 'default'}
-              />
-            {/* </DisplayToggles> */}
-            <EuiSpacer />
-          </EuiFlexItem>
-          <br/>
-          <EuiFlexItem> 
-            <EuiText  style={{ maxWidth: '400px' }}>
-                
-              <h3>Files attached</h3>
-              {this.renderFiles()}
-            </EuiText>
-          </EuiFlexItem>
-        </EuiFlexGroup>
-      </Fragment>
+                    <EuiPageBody style={{justifyContent: "center",alignItems:'center'}}>
+             <h1 style={{}}> Add Assignment</h1>    
+        <EuiFormRow
+          label="Assignment Title"
+         >
+          <EuiFieldText name="first" placeholder="Enter Assignment Title" display="center"/>
+        </EuiFormRow>
+
+        <EuiFormRow label="Select-Assignment Type" >
+          <EuiSelect display="centerCompressed"
+            options={[
+              { value: 'theory', text: 'Theory' },
+              { value: 'Programming', text: 'Programming' },
+              
+            ]}
+            
+          />
+        </EuiFormRow>
+
+        <EuiFormRow label="Upload Assignment file">
+          <EuiFilePicker display="centerCompressed" />
+        </EuiFormRow>
+
+        <EuiFormRow label="Select Deadline">
+          <EuiDatePicker display="centerCompressed"
+            showTimeSelect
+            selected={this.state.startDate}
+            onChange={this.handleChange}
+          />
+        </EuiFormRow>
+        <EuiButton>Add Assignment</EuiButton>
+   
                         {/* <FacultyDashboard/> */}
                     </EuiPageBody>
                 </EuiPage>
