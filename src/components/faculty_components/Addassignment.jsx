@@ -21,6 +21,7 @@ import {
   } from '@elastic/eui'
 import TreeView from './TreeView'
 import { EuiButton } from '@elastic/eui';
+import { CENTER_ALIGNMENT } from '@elastic/eui/lib/services/alignment';
 //import FacultyDashboard from './FacultyDashboard'
 
 export class Addassignment extends Component {
@@ -59,19 +60,40 @@ export class Addassignment extends Component {
                 <NavBar/>
                 <EuiPage>
                     <EuiPageSideBar><TreeView/></EuiPageSideBar>
-                    <EuiPageBody style={{justifyContent: "center",alignItems:'center'}}>
+                    <EuiPageBody >
+                     
              <h1 style={{}}> Add Assignment</h1>    
-        <EuiFormRow
-          label="Assignment Title"
-         >
-          <EuiFieldText name="first" placeholder="Enter Assignment Title" display="center"/>
+            <hr/>
+            <div className='container'>
+        <EuiFormRow label="Assignment Title">
+          <EuiFieldText id="assignmentTitle" placeholder="Enter Assignment Title" display="center"/>
         </EuiFormRow>
 
         <EuiFormRow label="Select-Assignment Type" >
-          <EuiSelect display="centerCompressed"
+          <EuiSelect 
             options={[
               { value: 'theory', text: 'Theory' },
               { value: 'Programming', text: 'Programming' },
+              
+            ]}
+            
+          />
+        </EuiFormRow>
+        <EuiFormRow label="Select-Subject" >
+          <EuiSelect 
+            options={[
+              { value: 'theory', text: 'JAVA' },
+              { value: 'Programming', text: 'PHP' },
+              
+            ]}
+            
+          />
+        </EuiFormRow>
+        <EuiFormRow label="Select-Semester" >
+          <EuiSelect
+            options={[
+              { value: 'theory', text: 'Sem-2' },
+              { value: 'Programming', text: 'Sem-3' },
               
             ]}
             
@@ -89,8 +111,10 @@ export class Addassignment extends Component {
             onChange={this.handleChange}
           />
         </EuiFormRow>
+        <EuiFormRow>
         <EuiButton>Add Assignment</EuiButton>
-   
+        </EuiFormRow>
+        </div>
                         {/* <FacultyDashboard/> */}
                     </EuiPageBody>
                 </EuiPage>

@@ -7,6 +7,7 @@ import {
     Route,
   } from 'react-router-dom';
 import ViewAssignemnt from './ViewAssignment';
+import ViewSubmitedAssignment, { ViewSubmitedAssignemnt } from './viewSubmited';
 
 export class Routing extends Component {
     render() {
@@ -23,6 +24,10 @@ export class Routing extends Component {
                     <Switch>
                         <Route exact path="/Viewassign" component={ViewAssignemnt}/>
                     </Switch>
+                    <Switch>
+                        <Route exact path="/ViewSubmitedassign" component={ViewSubmitedAssignemnt}/>
+                    </Switch>
+                   
                 </BrowserRouter>
             </div>
         )
